@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+           <title>Calculator</title>
+          <script type ="text/javascript" src="javascript.js"></script> 
+
+           
+        </head>
+        <body>
+        <form>
+        <table>
+            <tr>
+           <input type="text"  id="display" /><br>
+            </tr>
+            <tr>
+                <input type="button" value="7" onclick="numInput('7')" />
+                <input type="button" value="8" onclick="numInput('8')" />
+                <input type="button" value="9" onclick="numInput('9')" />
+                <input type="button" value="+" onclick="setOperation('add')"/><br>
+            </tr>
+            <tr>
+                <input type="button"  value="4" onclick="numInput('4')" />
+                <input type="button"  value="5" onclick="numInput('5')" />
+                <input type="button"  value="6" onclick="numInput('6')" />
+                <input type="button"  value="-" onclick="setOperation('subtract')" /><br>
+            </tr>
+            <tr>
+                <input type="button"  value="1" onclick="numInput('1')" />
+                <input type="button"  value="2" onclick="numInput('2')" />
+                <input type="button"  value="3" onclick="numInput('3')" />
+                <input type="button"  value="x" onclick="setOperation('multiply')"/><br>
+            </tr>
+            <tr>
+                <input type="button" value="0" onclick="numInput('0')" />
+                <input type="button" value="." onclick="insertDecimal('.')"/>
+                <input type="button" value="C" onclick="clearDisplay()" />
+                <input type="button" value="=" onclick="calculate()" />
+            </tr>
+            </table>
+        </form>
+    </body>
+</html>
