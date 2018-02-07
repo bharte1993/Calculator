@@ -3,7 +3,7 @@
  var operation = 0;
  var queuedOperation = 0;
  var calculationFinished = false;
- var xyz="";
+ var numericDigits="";
 
 function clearDisplay() {
     
@@ -11,30 +11,24 @@ function clearDisplay() {
     displayNum = "";
     storedNum = "";
     operation = 0;
-    queuedOperation = 0;        
+    queuedOperation = 0;
+    numericDigits="";        
     display.value = displayNum;
+    calculationFinished = false;
 
 }
 
 function numInput(num) {
-      xyz+=num;
-    var display = document.getElementById("display");
-    if (calculationFinished == true) {
-        display.value = num;
-        calculationFinished = false;
-    }
-    
-    else {
-      display.value += num;
-    }
-}
+      numericDigits+=num;
+      var display = document.getElementById("display");
+      display.value +=num;
+  }
 
 function insertDecimal(dec) {
     var display = document.getElementById("display");
-    for (i = 0; i < display.value.length; i++)
+    for (i = 0; i< display.value.length; i++)
         if (display.value.charAt(i) == '.') {
-            
-           return;
+            return;
         }
      display.value += dec;
 }
@@ -44,7 +38,7 @@ function setOperation(command) {
    var display = document.getElementById("display");  
     if (command == 'add') {
         operation = 1;
-       display.value+="+";
+        display.value+="+";
     }
     else if (command == 'subtract') {
         operation = 2;
@@ -52,43 +46,47 @@ function setOperation(command) {
     }
     if (command == 'multiply') {
         operation = 3;
-         display.value+="*";
+        display.value+="*";
     }
 
    
    
-            displayNum = xyz;
-  
-            evalDisplay = eval(displayNum),
-            evalStored = eval(storedNum);
-   
+          
 
         
-    if (queuedOperation == 0) {
-        storedNum = xyz
+    if (queuedOperation == 0&&calculationFinished==false) {
+              storedNum = numericDigits;
     }
-    else if (queuedOperation == 1) {
-        storedNum = evalStored + evalDisplay;
+    else if (queuedOperation == 1&&calculationFinished==false) {
+             displayNum =numericDigits ;
+             evalDisplay = eval(displayNum),
+             evalStored = eval(storedNum);
+             storedNum = evalStored + evalDisplay;
     }
-    else if (queuedOperation == 2) {
-        storedNum = evalStored - evalDisplay;
+     
+    else if (queuedOperation == 2&&calculationFinished==false) {
+            displayNum =numericDigits ;
+            evalDisplay = eval(displayNum),
+            evalStored = eval(storedNum);
+            storedNum = evalStored - evalDisplay;
     }
-    else if (queuedOperation == 3) {
-        storedNum = evalStored * evalDisplay;
+    else if (queuedOperation == 3&&calculationFinished==false) {
+            displayNum =numericDigits;
+            evalDisplay = eval(displayNum),
+            evalStored = eval(storedNum);
+            storedNum = evalStored * evalDisplay;
     }
 
-  
-   
-  
-    queuedOperation = operation;
-   // display.value = '';
-        xyz="";
+            queuedOperation = operation;
+            numericDigits="";
 }
+
+
 
 function calculate() {
  
    // var display = document.getElementById("display");
-            displayNum = xyz;
+            displayNum = numericDigits;
     var evalDisplay = eval(displayNum),
             evalStored = eval(storedNum);
 
@@ -104,13 +102,7 @@ function calculate() {
     }
 
     display.value = displayNum;
-    if (operation != 0){
-        calculationFinished = true;
-}
-   
-    operation = 0;
-    queuedOperation = 0;
-    displayNum = "";
-    storedNum = "";
-    xyz="";
+    calculationFinished = true;
+    storedNum=displayNum;
+    numericDigits="";
 }
