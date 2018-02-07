@@ -5,6 +5,7 @@
  var calculationFinished = false;
  var numericDigits="";
 
+
 function clearDisplay() {
     
     var display = document.getElementById("display");
@@ -15,6 +16,7 @@ function clearDisplay() {
     numericDigits="";        
     display.value = displayNum;
     calculationFinished = false;
+    storedNum1="";
 
 }
 
@@ -49,34 +51,29 @@ function setOperation(command) {
         display.value+="*";
     }
 
-   
-   
-          
-
-        
-    if (queuedOperation == 0&&calculationFinished==false) {
+  if (queuedOperation == 0&&calculationFinished ==false) {
               storedNum = numericDigits;
     }
-    else if (queuedOperation == 1&&calculationFinished==false) {
+      
+    else if (queuedOperation == 1) {
              displayNum =numericDigits ;
              evalDisplay = eval(displayNum),
              evalStored = eval(storedNum);
              storedNum = evalStored + evalDisplay;
     }
      
-    else if (queuedOperation == 2&&calculationFinished==false) {
+    else if (queuedOperation == 2) {
             displayNum =numericDigits ;
             evalDisplay = eval(displayNum),
             evalStored = eval(storedNum);
             storedNum = evalStored - evalDisplay;
     }
-    else if (queuedOperation == 3&&calculationFinished==false) {
+    else if (queuedOperation==3) {
             displayNum =numericDigits;
             evalDisplay = eval(displayNum),
             evalStored = eval(storedNum);
-            storedNum = evalStored * evalDisplay;
+            storedNum = evalStored*evalDisplay;
     }
-
             queuedOperation = operation;
             numericDigits="";
 }
@@ -84,14 +81,10 @@ function setOperation(command) {
 
 
 function calculate() {
- 
-   // var display = document.getElementById("display");
             displayNum = numericDigits;
-    var evalDisplay = eval(displayNum),
+            var evalDisplay = eval(displayNum),
             evalStored = eval(storedNum);
-
-    
-    if (operation == 1) {
+      if (operation == 1) {
         displayNum = evalStored + evalDisplay;
     }
     else if (operation == 2) {
@@ -102,7 +95,13 @@ function calculate() {
     }
 
     display.value = displayNum;
+    queuedOperation = 0;
     calculationFinished = true;
     storedNum=displayNum;
     numericDigits="";
+    
+    
 }
+
+
+
