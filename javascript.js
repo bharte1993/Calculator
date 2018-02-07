@@ -3,6 +3,7 @@
  var operation = 0;
  var queuedOperation = 0;
  var calculationFinished = false;
+ var xyz="";
 
 function clearDisplay() {
     
@@ -16,7 +17,7 @@ function clearDisplay() {
 }
 
 function numInput(num) {
-   
+      xyz+=num;
     var display = document.getElementById("display");
     if (calculationFinished == true) {
         display.value = num;
@@ -39,16 +40,32 @@ function insertDecimal(dec) {
 }
 
 function setOperation(command) {
+ 
+   var display = document.getElementById("display");  
+    if (command == 'add') {
+        operation = 1;
+       display.value+="+";
+    }
+    else if (command == 'subtract') {
+        operation = 2;
+        display.value+="-";
+    }
+    if (command == 'multiply') {
+        operation = 3;
+         display.value+="*";
+    }
+
    
-    var display = document.getElementById("display"),
-            displayNum = display.value;
+   
+            displayNum = xyz;
   
             evalDisplay = eval(displayNum),
             evalStored = eval(storedNum);
+   
 
         
     if (queuedOperation == 0) {
-        storedNum = display.value;
+        storedNum = xyz
     }
     else if (queuedOperation == 1) {
         storedNum = evalStored + evalDisplay;
@@ -61,25 +78,17 @@ function setOperation(command) {
     }
 
   
-    if (command == 'add') {
-        operation = 1;
-    }
-    else if (command == 'subtract') {
-        operation = 2;
-    }
-    if (command == 'multiply') {
-        operation = 3;
-    }
-
+   
   
     queuedOperation = operation;
-    display.value = '';
+   // display.value = '';
+        xyz="";
 }
 
 function calculate() {
  
-    var display = document.getElementById("display");
-            displayNum = display.value;
+   // var display = document.getElementById("display");
+            displayNum = xyz;
     var evalDisplay = eval(displayNum),
             evalStored = eval(storedNum);
 
@@ -103,4 +112,5 @@ function calculate() {
     queuedOperation = 0;
     displayNum = "";
     storedNum = "";
+    xyz="";
 }
