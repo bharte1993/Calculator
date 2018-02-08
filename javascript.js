@@ -1,34 +1,45 @@
- 
- var display = document.getElementById("display").value;
-
-
-function clearDisplay(val)
+ var decimal=false;
+ function clearDisplay(val)
 { 
- display=val;
+ document.getElementById("d").value = val;
+   decimal=false;
 }
 function numInput(val)
 {
-     display+=val;
+
+document.getElementById("d").value += val;
+
 }
 function insertDecimal(dec) {
-    for (i = 0; i< display.length; i++){
-        if (display.charAt(i) === '.') {
-            return;
+  var display = document.getElementById("d");
+     
+       if (decimal===true) {
+           return;
         }
-   }
-    display+=dec;
+     
+        if(decimal===true){
+    if (decimal===true&&display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/") {
+           return;
+      }
+}
+
+    display.value += dec;
+    decimal=true;
+     
 }
 function operator(op){
-   if (display.charAt(display.length) === op) {
-            return;
+     var display = document.getElementById("d");
+  if (display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/"||display.value.charAt(display.value.length-1) === ".") {
+           return;
       }
   
-    display+=op;
+    document.getElementById("d").value += op;
+    decimal=false;
+     
+     
 }
-
-
 
 function calculate() 
 { 
-  display=eval("display");
+  document.getElementById("d").value=eval(document.getElementById("d").value );
 }  
