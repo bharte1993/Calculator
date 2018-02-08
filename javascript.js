@@ -40,6 +40,10 @@ function operator(op){
 }
 
 function calculate() 
-{ 
+{ try{
   document.getElementById("d").value=eval(document.getElementById("d").value );
+}
+catch(err){
+document.getElementById("d").value="syntex error";
+}
 }  
