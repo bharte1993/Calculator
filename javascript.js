@@ -1,7 +1,7 @@
  var decimal=false;
- function clearDisplay(val)
+ function clearDisplay()
 { 
- document.getElementById("d").value = val;
+ document.getElementById("d").value ="";
    decimal=false;
 }
 function numInput(val)
@@ -18,7 +18,7 @@ function insertDecimal(dec) {
         }
      
         if(decimal===true){
-    if (decimal===true&&display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/") {
+    if (display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/") {
            return;
       }
 }
