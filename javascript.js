@@ -17,11 +17,11 @@ function insertDecimal(dec) {
            return;
         }
      
-        if(decimal===true){
-    if (display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/") {
+       
+    if (decimal===true&&display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/") {
            return;
       }
-}
+
 
     display.value += dec;
     decimal=true;
@@ -29,6 +29,11 @@ function insertDecimal(dec) {
 }
 function operator(op){
      var display = document.getElementById("d");
+
+     if(op==='-'&&display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/"){
+        document.getElementById("d").value += op;
+         return; 
+     }
   if (display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/"||display.value.charAt(display.value.length-1) === ".") {
            return;
       }
