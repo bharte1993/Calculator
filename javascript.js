@@ -1,13 +1,13 @@
  var decimal=false;
  function clearDisplay()
 { 
- document.getElementById("d").value ="";
+   document.getElementById("d").value ="";
    decimal=false;
 }
 function numInput(val)
 {
 
-document.getElementById("d").value += val;
+  document.getElementById("d").value += val;
 
 }
 function insertDecimal(dec) {
@@ -17,35 +17,34 @@ function insertDecimal(dec) {
            return;
         }
      
-  
-   
-
-    display.value += dec;
-    decimal=true;
+      display.value += dec;
+      decimal=true;
      
 }
 function operator(op){
-     var display = document.getElementById("d");
-     if(op==='-'&&display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/"){
+   var display = document.getElementById("d");
+  l=display.value.charAt(display.value.length-1);
+    const set = new Set(["+", ".", "-", "*", "/"]);
+    
+     if(op==='-'&&l === "*"||l === "/"){
         document.getElementById("d").value += op;
          return; 
      }
-  if (display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/"||display.value.charAt(display.value.length-1) === ".") {
-           return;
-      }
+      if(set.has(l)){
+          return;
+     }
   
-    document.getElementById("d").value += op;
-    decimal=false;
+      document.getElementById("d").value += op;
+      decimal=false;
      
-     
-}
+    }
 
 function calculate() { 
 	try{
+
   	 	document.getElementById("d").value=eval(document.getElementById("d").value );
  	}catch(err){
-          document.getElementById("d").value="Syntex Error";
-            
+   document.getElementById("d").value="Syntex Error";
  }
 }
 
