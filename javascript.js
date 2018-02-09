@@ -1,65 +1,74 @@
  var decimal=false;
  function clearDisplay()
 { 
-   document.getElementById("d").value ="";
+   document.getElementById("display").value ="";
    decimal=false;
+   firstCalculation=false;
 }
 function numInput(val)
 {
-
-  document.getElementById("d").value += val;
-
+document.getElementById("display").value += val;
 }
 function insertDecimal(dec) {
-  var display = document.getElementById("d");
-     
-       if (decimal===true) {
+   if (decimal===true) {
            return;
         }
-     
-      display.value += dec;
+      document.getElementById("display").value += dec;
       decimal=true;
-     
-}
-function operator(op){
-   var display = document.getElementById("d");
-  l=display.value.charAt(display.value.length-1);
-    const set = new Set(["+", ".", "-", "*", "/"]);
-    
+     }
+function setOperator(op){
+   var display = document.getElementById("display");
+   l=display.value.charAt(display.value.length-1);
+   const set = new Set(["+", ".", "-", "*", "/"]);
      if(op==='-'&&l === "*"||l === "/"){
-        document.getElementById("d").value += op;
+        display.value += op;
          return; 
      }
       if(set.has(l)){
           return;
      }
-  
-      document.getElementById("d").value += op;
+  display.value += op;
       decimal=false;
+      
      
     }
-
-function calculate() { 
-	try{
-
-  	 	document.getElementById("d").value=eval(document.getElementById("d").value );
- 	}catch(err){
-   document.getElementById("d").value="Syntex Error";
- }
+function getlastOperation(displayValue){
+  var lastoperation=displayValue.charAt(displayValue.length-1);
+  for (i=displayValue.length-2;i>0; --i){
+      lastoperation=displayValue.charAt(i)+lastoperation;
+      if(displayValue.charAt(i) === "+"||displayValue.charAt(i) === "-"||displayValue.charAt(i) === "*"||displayValue.charAt(i) === "/"){
+            return lastoperation;
+       }
+}
+     return lastoperation;
 }
 
+function calculate() { 
 
+	try{     
+                 display=document.getElementById("display");
+                ckeckOperations=display.value.includes("+")||display.value.includes("-")||display.value.includes("*")||display.value.includes("/");
+                   if(ckeckOperations){ 
+                   lastOperation=getlastOperation(display.value);
+                 }
+                
+                  if(ckeckOperations){
+                     display.value=eval(display.value);
+                   }
+                  else{ 
+                         a=display.value+lastOperation;
+                         display.value=eval(a);
+                    } 
+                 }catch(err){
+         document.getElementById("display").value="Syntex Error";
+ }
+}
 
 document.onkeydown=function(e){
 var key=e.charCode||e.keyCode;
 if(key===13){
-  
-calculate();
+  calculate();
 }
-if((key<37&&key>15)||(key<91&&key>64)||(key<193&&key>111)||key===220||key===222){
-    
-      e.preventDefault();
- }
 }
 
 
