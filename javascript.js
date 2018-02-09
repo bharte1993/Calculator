@@ -17,11 +17,8 @@ function insertDecimal(dec) {
            return;
         }
      
-       
-    if (decimal===true&&display.value.charAt(display.value.length-1) === "+"||display.value.charAt(display.value.length-1) === "-"||display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/") {
-           return;
-      }
-
+  
+   
 
     display.value += dec;
     decimal=true;
@@ -29,7 +26,6 @@ function insertDecimal(dec) {
 }
 function operator(op){
      var display = document.getElementById("d");
-
      if(op==='-'&&display.value.charAt(display.value.length-1) === "*"||display.value.charAt(display.value.length-1) === "/"){
         document.getElementById("d").value += op;
          return; 
@@ -44,11 +40,28 @@ function operator(op){
      
 }
 
-function calculate() 
-{ try{
-  document.getElementById("d").value=eval(document.getElementById("d").value );
+function calculate() { 
+	try{
+  	 	document.getElementById("d").value=eval(document.getElementById("d").value );
+ 	}catch(err){
+          document.getElementById("d").value="Syntex Error";
+            
+ }
 }
-catch(err){
-document.getElementById("d").value="syntex error";
+
+
+
+document.onkeydown=function(e){
+var key=e.charCode||e.keyCode;
+if(key===13){
+  
+calculate();
 }
-}  
+if((key<37&&key>15)||(key<91&&key>64)||(key<193&&key>111)||key===220||key===222){
+    
+      e.preventDefault();
+ }
+}
+
+
+
