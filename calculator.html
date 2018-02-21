@@ -12,7 +12,7 @@
             <tr>
 
 
-                <input type="text"  id="display" onkeydown=" return keyPress(event)" onpaste=" return false"/><br>
+                <input type="text"  id="display" onkeydown=" return keydown(event)" onpaste=" return false"/><br>
             </tr>
             <tr>
                 <input type="button" value="7" onclick="numInput(value)" />
@@ -39,6 +39,8 @@
                 <input type="button" value="/" onclick="setOperator(value)" /><br>
             </tr>
             <tr>
+                <input type="button" value="(" onclick="numInput(value)" />
+                <input type="button" value=")" onclick="numInput(value)" />
                 <input type="button" value="=" onclick="calculate()" />
             </tr>
             
